@@ -2,9 +2,20 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db';
 
+
+// marshrutlar
+import adminRoutes from "./routes/admin.routes"
+import authRoutes from "./routes/auth.routes"
+
 dotenv.config();
 connectDB();
 const app = express();
+
+// json() {}
+app.use(express.json())
+
+app.use('/api/admin', adminRoutes)
+app.use('/api/auth', authRoutes)
 
 
 
@@ -13,4 +24,6 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   res.status(500).json({ error: 'Server Xətası' });
 });
 
-app.listen(process.env.PORT, () => console.log(`Kiber Qala işləyir 🚀`)); 
+app.listen(process.env.PORT, () => console.log(`Veb tetbiqimiz ugurla calisir 🚀`)); 
+
+
